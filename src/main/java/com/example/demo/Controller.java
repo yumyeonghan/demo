@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -9,14 +10,31 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 public class Controller {
 
-    //Json 응답
+
+    // jquery test
+    @ResponseBody
+    @GetMapping("/test")
+    public String test() {
+        String text = "test";
+        return text;
+    }
+
+    // jsp test
+    @GetMapping(value = "/main")
+    public String home(Model model) throws Exception {
+        model.addAttribute("name", "jeffrey");
+
+        return "index";
+    }
+
+    // Json 응답
     @ResponseBody
     @GetMapping("/json-test")
     public User jsonTest() {
         return new User("유명한", 24, "19991013", "남자");
     }
 
-    //Json 리스트 응답
+    // Json 리스트 응답
     @ResponseBody
     @GetMapping("/json-list-test")
     public List<User> jsonListTest() {
